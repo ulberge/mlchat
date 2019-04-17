@@ -80,8 +80,9 @@ def score_f(logit, name):
   else:
     raise RuntimeError("Unsupported")
 
-def channel_attr_simple(img, layer, class_name):
-
+def get_channel_attr(img):
+  layer = "mixed4d"
+  class_name = "Labrador retriever"
   # Set up a graph for doing attribution...
   with tf.Graph().as_default(), tf.Session() as sess:
     t_input = tf.placeholder_with_default(img, [None, None, 3])
@@ -104,18 +105,9 @@ def channel_attr_simple(img, layer, class_name):
     # Then we reduce down to channels.
     channel_attr = attr.sum(0).sum(0)
 
-  # Now we just need to present the results.
-  
-  # Get spritemaps
-  
-  
-  spritemap_n, spritemap_url = googlenet_spritemap(layer)
+  return channel_attr
 
-  # Let's pick the most extreme channels to show
-  ns_pos = list(np.argsort(-channel_attr))
-  return ns_pos, channel_attr
-
-avg_intent = []
+canon = []
 avg_intent_order = []
 neuronCount = 100
 
@@ -125,7 +117,17 @@ def judge():
   print img_url
   img = load(img_url)
   print 'get channel from layer'
-  ns_pos, channel_attr = channel_attr_simple(img, "mixed4d", "Labrador retriever")
+  channel_attr = get_channel_attr(img)
+  
+  # Let's pick the most extreme channels to show
+  ns_pos = list(np.argsort(-channel_attr)[:100])
+  
+  for i in ns_pos:
+    canon[i] = (i, channel_attr[i])
+    
+  
+  
+  
   print 'finished get channel from layer'
   
   idxMap = dict([(channel_attr[i],i) for i in range(len(channel_attr))])
@@ -165,16 +167,14 @@ def newIntent():
   print 'loading intent image'
   img = load(img_url)
   print 'loaded intent image'
-  ns_pos, channel_attr = channel_attr_simple(img, "mixed4d", "Labrador retriever")
-  print 'processed intent image'
-  avg_intent = channel_attr
+  channel_attr = get_channel_attr(img)
   
-  avg_intent_order = list(np.argsort(-channel_attr)[:neuronCount])
-  avg_intent = []
-  for i in avg_intent_order:
-    avg_intent.append(channel_attr[i])
-  print 'avg_intent', avg_intent
-  print 'avg_intent_order', avg_intent_order
+  # Let's pick the most important channels of the cannon
+  ns_pos = list(np.argsort(-channel_attr)[:100])
+  
+  # Replace the canon
+  for i in ns_pos:
+    canon[i] = (i, channel_attr[i])
   
   return jsonify(success=True)
 
