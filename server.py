@@ -108,7 +108,6 @@ def get_channel_attr(img):
   return channel_attr
 
 canon = []
-avg_intent_order = []
 neuronCount = 100
 
 @app.route('/judge', methods=['GET', 'POST'])
@@ -119,46 +118,21 @@ def judge():
   print 'get channel from layer'
   channel_attr = get_channel_attr(img)
   
-  # Let's pick the most extreme channels to show
-  ns_pos = list(np.argsort(-channel_attr)[:100])
+  # create dict
+  idxMap = dict([(i, channel_attr[i]) for i in range(len(channel_attr))])
   
-  for i in ns_pos:
-    canon[i] = (i, channel_attr[i])
+  # for all the neurons in the canon calculate the diff with this img
+  diffs = []
+  print 'canon?', canon
+  for neuron in canon:
+    id, attr = neuron
+    diff = attr - channel_attr[id]
+    diffs.append((id, diff))
     
+  diffs.sort(key=lambda x: x[1], reverse=True)
+  print diffs
   
-  
-  
-  print 'finished get channel from layer'
-  
-  idxMap = dict([(channel_attr[i],i) for i in range(len(channel_attr))])
-  
-  # Let's get all the diffs between avgs and current
-  # diffs will be in order of avg_intent_order
-  diffs = channel_attr
-  for i in range(len(avg_intent_order)):
-    j = avg_intent_order[i]
-    diffs[j] = avg_intent[j] - channel_attr[j]
-  
-  # this is the order of the avg_intents
-  diffs_order = list(np.argsort(diffs))[::-1]
-  neuron_indexes_ordered = []
-  neuron_diffs_ordered = []
-  for diff_index, avg_intent_index in diffs_order:
-    neuron_diffs_ordered.append(diffs[diff_index])
-    neuron_index = avg_intent_order[avg_intent_index]
-    neuron_indexes_ordered.append(neuron_index)
-  
-  #  reorder the ns_pos by diffs
-  ns_pos_ordered = []
-  ns_pos_diff_ordered = []
-  for i in diffs_order:
-    ns_pos_ordered.append(ns_pos[i])
-    ns_pos_diff_ordered.append(diffs[i])
-  print order_diffs[:10]
-  print ns_pos_ordered[:10]
-  
-  # return ''
-  return jsonify(ns_pos_ordered)
+  return jsonify(diffs)
 
 @app.route('/intent/new', methods=['POST'])
 def newIntent():
@@ -170,11 +144,13 @@ def newIntent():
   channel_attr = get_channel_attr(img)
   
   # Let's pick the most important channels of the cannon
-  ns_pos = list(np.argsort(-channel_attr)[:100])
+  order = list(np.argsort(-channel_attr)[:100])
   
   # Replace the canon
-  for i in ns_pos:
-    canon[i] = (i, channel_attr[i])
+  canon = []
+  for i in order:
+    canon.append((i, channel_attr[i]))
+  print canon
   
   return jsonify(success=True)
 
