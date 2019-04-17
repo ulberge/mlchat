@@ -20,6 +20,19 @@ $(function() {
     };
     $.get('/judge', data, function(ns_pos) {
       console.log(ns_pos);
+      
+      for (let i = 0; i < 3; i++) {
+        const sprite = ns_pos[i];
+        const x = -110 * (spriteN'px';
+        const y = 'px';
+      }
+      const spritemap_url = '';
+      
+           background-position: -2310px -110px;
+    <div class="sprite" style="
+        background-position: -{{sprite_size*(attr.n%sprite_n_wrap)}}px -{{sprite_size*Math.floor(attr.n/sprite_n_wrap)}}px;
+      "></div>
+
     });
   }
   

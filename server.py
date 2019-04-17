@@ -148,8 +148,9 @@ def judge():
 
 @app.route('/intent/new', methods=['POST'])
 def newIntent():
-  imgUrl = request.args.get('url')
-  img = load(imgUrl)
+  img_url = request.values.get('url')
+  print img_url
+  img = load(img_url)
   ns_pos, channel_attr = channel_attr_simple(img, "mixed4d", "Labrador retriever")
   avgIntent = channel_attr
   return ''
