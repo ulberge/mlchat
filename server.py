@@ -141,7 +141,7 @@ def newIntent():
   print img_url
   print 'loading intent image'
   img = load(img_url)
-  print 'loaded intent image'
+  print 'loaded intent image '
   channel_attr = get_channel_attr(img)
   
   # Let's pick the most important channels of the cannon

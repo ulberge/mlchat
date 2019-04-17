@@ -27,7 +27,7 @@ $(function() {
       const text = $('<span>What about something like </span>');
       $('#vizs').append(text);
       
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 10; i++) {
         const spriteN = result[i][0];
         const x = (-110 * (spriteN % 22)) + 'px';
         const y = (-110 * Math.floor(spriteN / 22)) + 'px';
