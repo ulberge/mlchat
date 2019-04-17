@@ -5,22 +5,14 @@
 // add other scripts at the bottom of index.html
 
 $(function() {
-  console.log('hello world :o');
+  console.log('hello world :o')
   
-  $.get('/dreams', function(dreams) {
-    dreams.forEach(function(dream) {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
-    });
+  const data = {
+    url: 'https://storage.googleapis.com/lucid-static/building-blocks/examples/dog_cat.png',
+    n_show: 5
+  };
+  
+  $.get('/dreams', data, function(ns_pos) {
+    console.log(ns_pos);
   });
-
-  $('form').submit(function(event) {
-    event.preventDefault();
-    dream = $('input').val();
-    $.post('/dreams?' + $.param({'dream': dream}), function() {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
-      $('input').val('');
-      $('input').focus();
-    });
-  });
-
 });

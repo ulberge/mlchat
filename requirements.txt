@@ -1,2 +1,3 @@
 Flask
 gunicorn
+lucid==0.0.5
