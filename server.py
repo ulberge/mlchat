@@ -122,13 +122,15 @@ def judge():
   img_url = request.args.get('url')
   print img_url
   img = load(img_url)
+  print 'get channel from layer'
   ns_pos, channel_attr = channel_attr_simple(img, "mixed4d", "Labrador retriever")
+  print 'finished get channel from layer'
   # return jsonify(ns_pos[:10])
 #   # Let's pick the most extreme channels to show
-  diff = channel_attr
+  diffs = channel_attr
   if len(avg_intent) == len(channel_attr):
     for i in range(len(channel_attr)):
-      diff[i] = avg_intent[i] - channel_attr[i]
+      diffs[i] = avg_intent[i] - channel_attr[i]
   
   order = list(np.argsort(diffs))[::-1]
   

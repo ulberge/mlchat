@@ -5,12 +5,25 @@
 // add other scripts at the bottom of index.html
 
 $(function() {
-  console.log('hello world :o')
+  function addIntent() {
+    const url = $('#intent').attr('src');
+    const data = {
+      url: url
+    };
+    $.post('/intent/new', data);
+  }
   
-  const data = {
-    url: 'https://storage.googleapis.com/lucid-static/building-blocks/examples/dog_cat.png'
-  };
-  $.get('/judge', data, function(ns_pos) {
-    console.log(ns_pos);
-  });
+  function judge() {
+    const url = $('#drawing').attr('src');
+    const data = {
+      url: url
+    };
+    $.get('/judge', data, function(ns_pos) {
+      console.log(ns_pos);
+    });
+  }
+  
+  $('#judge').click(judge);
+  $('#addIntent').click(addIntent);
+  
 });
