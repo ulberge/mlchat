@@ -12,7 +12,16 @@ $(function() {
     n_show: 5
   };
   
-  $.get('/dreams', data, function(ns_pos) {
-    console.log(ns_pos);
-  });
+  $.ajax(
+    {
+      type: 'GET', //rest Type
+      dataType: 'jsonp', //mispelled
+      url: '/judge', 
+      data: data, 
+      success: function(ns_pos) {
+        console.log(ns_pos);
+      },
+      dataType: 'jsonp'
+    }
+  );
 });

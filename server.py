@@ -80,7 +80,7 @@ def score_f(logit, name):
   else:
     raise RuntimeError("Unsupported")
 
-def channel_attr_simple(img, layer, class_name, n_show=4):
+def channel_attr_simple(img, layer, class_name):
 
   # Set up a graph for doing attribution...
   with tf.Graph().as_default(), tf.Session() as sess:
@@ -112,29 +112,45 @@ def channel_attr_simple(img, layer, class_name, n_show=4):
   spritemap_n, spritemap_url = googlenet_spritemap(layer)
 
   # Let's pick the most extreme channels to show
-  ns_pos = list(np.argsort(-channel_attr)[:n_show])
+  ns_pos = list(np.argsort(-channel_attr))
+  return ns_pos, channel_attr
+
+avg_intent = []
+
+@app.route('/judge', methods=['GET', 'POST'])
+def judge():
+  img_url = request.args.get('url')
+  print img_url
+  img = load(img_url)
+  ns_pos, channel_attr = channel_attr_simple(img, "mixed4d", "Labrador retriever")
   
-  print ns_pos
+  # Let's pick the most extreme channels to show
+#   diff = channel_attr
+#   if len(avg_intent) == len(channel_attr):
+#     for i in range(len(channel_attr)):
+#       diff[i] = avg_intent[i] - channel_attr[i]
   
-  return ns_pos
+#   order = list(np.argsort(diffs))[::-1]
   
-@app.route('/dreams', methods=['GET', 'POST'])
-def dreams():
-  imgUrl = request.args.get('url')
-  n_show = request.args.get('n_show')
-  img = load(imgUrl)
-  ns_pos = channel_attr_simple(img, "mixed4d", "Labrador retriever", n_show=3)
-  print ns_pos
-  return jsonify(ns_pos)
+#   #  reorder the ns_pos by diffs
+#   ns_pos_ordered = []
+#   order_diffs = []
+#   for o in order:
+#     ns_pos_ordered.append(ns_pos[o])
+#     order_diffs.append(diffs[o])
+#   print order_diffs[:10]
+#   print ns_pos_ordered[:10]
+  
+#   return jsonify(ns_pos_ordered)
+  return ''
 
 @app.route('/intent/new', methods=['POST'])
 def newIntent():
   imgUrl = request.args.get('url')
-  n_show = request.args.get('n_show')
   img = load(imgUrl)
-  ns_pos = channel_attr_simple(img, "mixed4d", "Labrador retriever", n_show=3)
-  print ns_pos
-  return jsonify(ns_pos)
+  ns_pos, channel_attr = channel_attr_simple(img, "mixed4d", "Labrador retriever")
+  avgIntent = channel_attr
+  return ''
 
 if __name__ == '__main__':
     app.run()
