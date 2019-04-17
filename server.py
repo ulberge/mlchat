@@ -150,10 +150,16 @@ def judge():
 def newIntent():
   img_url = request.values.get('url')
   print img_url
+  print 'loading intent image'
   img = load(img_url)
+  print 'loaded intent image'
   ns_pos, channel_attr = channel_attr_simple(img, "mixed4d", "Labrador retriever")
+  print 'processed intent image'
   avgIntent = channel_attr
-  return ''
+  
+  order = list(np.argsort(-channel_attr))[::-1]
+  print order[:10]
+  return jsonify(success=True)
 
 if __name__ == '__main__':
     app.run()

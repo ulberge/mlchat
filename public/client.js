@@ -10,7 +10,9 @@ $(function() {
     const data = {
       url: url
     };
-    $.post('/intent/new', data);
+    $.post('/intent/new', data, function() {
+     console.log('finished adding intent'); 
+    });
   }
   
   function judge() {
@@ -19,20 +21,15 @@ $(function() {
       url: url
     };
     $.get('/judge', data, function(ns_pos) {
-      console.log(ns_pos);
+      console.log('received biggest diffs', ns_pos);
       
       for (let i = 0; i < 3; i++) {
-        const sprite = ns_pos[i];
-        const x = -110 * (spriteN'px';
-        const y = 'px';
+        const spriteN = ns_pos[i];
+        const x = (-110 * (spriteN % 22)) + 'px';
+        const y = (-110 * Math.floor(spriteN / 22)) + 'px';
+        const id = 'viz' + i;
+        $('#' + id).css('background-position', x + ' ' + y);
       }
-      const spritemap_url = '';
-      
-           background-position: -2310px -110px;
-    <div class="sprite" style="
-        background-position: -{{sprite_size*(attr.n%sprite_n_wrap)}}px -{{sprite_size*Math.floor(attr.n/sprite_n_wrap)}}px;
-      "></div>
-
     });
   }
   
