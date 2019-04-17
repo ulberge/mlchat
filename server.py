@@ -123,26 +123,26 @@ def judge():
   print img_url
   img = load(img_url)
   ns_pos, channel_attr = channel_attr_simple(img, "mixed4d", "Labrador retriever")
+  # return jsonify(ns_pos[:10])
+#   # Let's pick the most extreme channels to show
+  diff = channel_attr
+  if len(avg_intent) == len(channel_attr):
+    for i in range(len(channel_attr)):
+      diff[i] = avg_intent[i] - channel_attr[i]
   
-  # Let's pick the most extreme channels to show
-#   diff = channel_attr
-#   if len(avg_intent) == len(channel_attr):
-#     for i in range(len(channel_attr)):
-#       diff[i] = avg_intent[i] - channel_attr[i]
+  order = list(np.argsort(diffs))[::-1]
   
-#   order = list(np.argsort(diffs))[::-1]
+  #  reorder the ns_pos by diffs
+  ns_pos_ordered = []
+  order_diffs = []
+  for o in order:
+    ns_pos_ordered.append(ns_pos[o])
+    order_diffs.append(diffs[o])
+  print order_diffs[:10]
+  print ns_pos_ordered[:10]
   
-#   #  reorder the ns_pos by diffs
-#   ns_pos_ordered = []
-#   order_diffs = []
-#   for o in order:
-#     ns_pos_ordered.append(ns_pos[o])
-#     order_diffs.append(diffs[o])
-#   print order_diffs[:10]
-#   print ns_pos_ordered[:10]
-  
-#   return jsonify(ns_pos_ordered)
-  return ''
+  # return ''
+  return jsonify(ns_pos_ordered)
 
 @app.route('/intent/new', methods=['POST'])
 def newIntent():
