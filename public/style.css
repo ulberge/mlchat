@@ -85,4 +85,5 @@ footer > a {
   background-image: url("https://storage.googleapis.com/lucid-static/building-blocks/googlenet_spritemaps/sprite_mixed4d_channel_alpha.jpeg"); 
   width: 110px; 
   height: 110px;
+  display: inline-block;
 }

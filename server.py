@@ -130,7 +130,7 @@ def judge():
     diffs.append((id, int(diff * 1000)))
     
   diffs.sort(key=lambda x: x[1], reverse=True)
-  print 'diffs ', diffs
+  print 'diffs', diffs
   
   return jsonify(diffs)
 

@@ -30,7 +30,7 @@ $(function() {
         const x = (-110 * (spriteN % 22)) + 'px';
         const y = (-110 * Math.floor(spriteN / 22)) + 'px';
         const id = 'viz' + i;
-        const div = $('<div class="viz_sprite"></div>');
+        const div = $('<span class="viz_sprite"></span>');
         div.css('background-position', x + ' ' + y);
         $('#vizs').append(div);
       }
