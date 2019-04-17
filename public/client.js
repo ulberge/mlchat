@@ -23,12 +23,16 @@ $(function() {
     $.get('/judge', data, function(ns_pos) {
       console.log('received biggest diffs', ns_pos);
       
-      for (let i = 0; i < 3; i++) {
+      $('#vizs').empty();
+      
+      for (let i = 0; i < 10; i++) {
         const spriteN = ns_pos[i];
         const x = (-110 * (spriteN % 22)) + 'px';
         const y = (-110 * Math.floor(spriteN / 22)) + 'px';
         const id = 'viz' + i;
-        $('#' + id).css('background-position', x + ' ' + y);
+        const div = $('<div class="viz_sprite"></div>');
+        div.css('background-position', x + ' ' + y);
+        $('#vizs').append(div);
       }
     });
   }

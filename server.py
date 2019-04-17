@@ -157,8 +157,9 @@ def newIntent():
   print 'processed intent image'
   avgIntent = channel_attr
   
-  order = list(np.argsort(-channel_attr))[::-1]
-  print order[:10]
+  # order = list(np.argsort(-channel_attr))
+  # print order[:10]
+  print 'test22'
   return jsonify(success=True)
 
 if __name__ == '__main__':
