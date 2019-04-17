@@ -156,10 +156,14 @@ def newIntent():
   ns_pos, channel_attr = channel_attr_simple(img, "mixed4d", "Labrador retriever")
   print 'processed intent image'
   avgIntent = channel_attr
+  # print avgIntent
   
-  # order = list(np.argsort(-channel_attr))
-  # print order[:10]
-  print 'test22'
+  order = list(np.argsort(-channel_attr)[:528])
+  print order
+  pos_ca = []
+  for p in order:
+    pos_ca.append(channel_attr[p])
+  print 'pos_ca', pos_ca
   return jsonify(success=True)
 
 if __name__ == '__main__':
