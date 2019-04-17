@@ -123,19 +123,20 @@ def judge():
   
   # for all the neurons in the canon calculate the diff with this img
   diffs = []
-  print 'canon?', canon
+  print 'canon', canon
   for neuron in canon:
     id, attr = neuron
     diff = attr - channel_attr[id]
-    diffs.append((id, diff))
+    diffs.append((id, int(diff * 1000)))
     
   diffs.sort(key=lambda x: x[1], reverse=True)
-  print diffs
+  print 'diffs ', diffs
   
   return jsonify(diffs)
 
 @app.route('/intent/new', methods=['POST'])
 def newIntent():
+  global canon
   img_url = request.values.get('url')
   print img_url
   print 'loading intent image'
