@@ -24,16 +24,20 @@ $(function() {
       console.log('received biggest diffs', result);
       
       $('#vizs').empty();
+      const text = $('<span>What about something like </span>');
+      $('#vizs').append(text);
       
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 3; i++) {
         const spriteN = result[i][0];
         const x = (-110 * (spriteN % 22)) + 'px';
         const y = (-110 * Math.floor(spriteN / 22)) + 'px';
         const id = 'viz' + i;
-        const div = $('<span class="viz_sprite"></span>');
+        const div = $('<span class="viz_sprite">');
         div.css('background-position', x + ' ' + y);
         $('#vizs').append(div);
       }
+      const text2 = $('<span>?</span>');
+      $('#vizs').append(text2);
     });
   }
   

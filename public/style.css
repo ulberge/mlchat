@@ -86,4 +86,5 @@ footer > a {
   width: 110px; 
   height: 110px;
   display: inline-block;
+  margin: 0 10px;
 }
