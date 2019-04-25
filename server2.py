@@ -50,7 +50,7 @@ def judgeDataUrl():
         meta, data = data_uri.split(',')
         layer = request.values.get("layer")
         class_name = request.values.get("className")
-        print 'request', layer, class_name
+        print('request', layer, class_name)
 
         # create temp file to send for processing
         url = "/tmp/curr.png"
@@ -58,7 +58,6 @@ def judgeDataUrl():
         fh.write(data.decode('base64'))
         fh.close()
         img = load(url)
-        print 'loaded image'
 
         channel_attr = get_channel_attr(img, layer, class_name)
 
@@ -76,20 +75,15 @@ def f(num):
 
 
 def score_f(logit, name):
-    # print model.labels
+    # print(model.labels
     if name is None:
-        print 'no score'
         return 0
     elif name == "logsumexp":
-        print 'name logsumexp'
         base = tf.reduce_max(logit)
         return base + tf.log(tf.reduce_sum(tf.exp(logit-base)))
     elif name in model.labels:
-        # print 'name in labels', model.labels.index(name)
-        # print 'name in labels', logit.shape, logit[model.labels.index(name)]
         return logit[model.labels.index(name)]
     else:
-        print 'exception'
         raise RuntimeError("Unsupported")
 
 
@@ -101,38 +95,34 @@ def get_channel_attr(img, layer, class_name):
         T = render.import_model(model, t_input, t_input)
 
         ts1 = time.time()
-        print 't1 ', (ts1 - ts0)
+        print('t1 ', (ts1 - ts0))
         # Compute activations
         acts = T(layer).eval()
         ts2 = time.time()
-        print 't2 ', (ts2 - ts1)
+        print('t2 ', (ts2 - ts1))
         # Compute gradient
         logit = T("softmax2_pre_activation")[0]
         ts2b = time.time()
-        print 't2b ', (ts2b - ts2)
+        print('t2b ', (ts2b - ts2))
         # score = score_f(logit, class_name) - score_f(logit, "cockroach")
         score = score_f(logit, class_name)
-        # print 'score', [score][0]
-        # print 'xs?', [T(layer)][0]
         tensor_layer = T(layer)
-        # print 'score shape', score.shape
-        # print 'tensor_layer shape', tensor_layer.shape
         t_grad = tf.gradients([score], [tensor_layer])[0]
         grad = t_grad.eval()
         ts3 = time.time()
-        print 't3 ', (ts3 - ts2b)
+        print('t3 ', (ts3 - ts2b))
 
         # Let"s do a very simple linear approximation attribution.
         # That is, we say the attribution of y to x is
         # the rate at which x changes y times the value of x.
         attr = (grad*acts)[0]
         ts4 = time.time()
-        print 't4 ', (ts4 - ts3)
+        print('t4 ', (ts4 - ts3))
 
         # Then we reduce down to channels.
         channel_attr = attr.sum(0).sum(0)
         ts5 = time.time()
-        print 't5 ', (ts5 - ts4)
+        print('t5 ', (ts5 - ts4))
 
         return channel_attr
 
