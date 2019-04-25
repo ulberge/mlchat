@@ -10,13 +10,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Welcome to Glitch!</title>
-    <meta name="description" content="A cool thing made with Glitch">
+    <title>ML Draw Chat</title>
+    <meta name="description" content="A cool thing made with ML">
     <link id="favicon" rel="icon" href="https://gomix.com/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
     <header>
@@ -25,25 +26,31 @@
       </h1>
     </header>
 
-    <main>
-      <img id="intent" src="https://cdn.glitch.com/c23c8be1-6819-4851-a865-b1e834bf9330%2Fdog2.png?1555524291089" alt="Design Intent" />
-      <img id="drawing" src="https://cdn.glitch.com/97dcb756-bb02-4ae4-9105-5605d4412019%2Fdog2ear22.png?1555533487050" alt="Drawing" />
-      <button type="button" id="addIntent">Add Intent</button><button id="judge" type="button">Judge</button>
-      
-      <div id="vizs"></div>
+    <main class="container">
+      <div class="testCol col-md-12">
+        <div class="col-md-3">
+          <h3>Live Test</h3><button type=button id="toggleRun">Toggle Run</button>
+          <div id="my_camera"></div>
+          <input type=button value="Take Snapshot" onClick="take_snapshot()">
+        </div>
+        <div class="col-md-9">
+          <canvas id="attrChart" width="600" height="160"></canvas>
+          <canvas id="diffChart" width="600" height="160"></canvas>
+          <canvas id="eventChart" width="600" height="160"></canvas>
+          <div id="snapshots"></div>
+        </div>
+      </div>
     </main>
-
-    <footer>
-      <a href="https://glitch.com">
-        Remix this in Glitch
-      </a>
-    </footer>
 
     <!-- Your web-app is https, so your scripts need to be too -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
-    <script src="/public/client.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"
+            crossorigin="anonymous"></script>
+    <script src="/public/webcam.js"></script>
+    <script src="/public/Neuron.js"></script>
+    <script src="/public/main.js"></script>
 
   </body>
 </html>

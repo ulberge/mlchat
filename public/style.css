@@ -82,9 +82,62 @@ footer > a {
 }
 
 .viz_sprite {
-  background-image: url("https://storage.googleapis.com/lucid-static/building-blocks/googlenet_spritemaps/sprite_mixed4d_channel_alpha.jpeg"); 
-  width: 110px; 
+  width: 110px;
   height: 110px;
   display: inline-block;
-  margin: 0 10px;
+  margin: 10px;
+  position: relative;
+  transform: scale(0.7);
+}
+
+.testContainer .viz_sprite {
+  transform: scale(1);
+  zoom:0.3;
+  -moz-transform:scale(0.3);
+  -moz-transform-origin: 0 0;
+  margin: 4px;
+  /*width: calc(110px * 0.3);
+  height: calc(110px * 0.3);
+  background-size: calc(2420px * 0.3) calc(2640px * 0.3);*/
+}
+
+.testContainer {
+  font-size: 9px;
+}
+
+.testContainer img {
+  width: 180px;
+  height: 180px;
+}
+
+.testContainer .partLabel {
+  vertical-align: top;
+  top: 15px;
+  position: relative;
+}
+
+.test-parts-row {
+  height: 50px;
+}
+.test-parts-row.actual {
+  height: 210px;
+}
+
+.test-row {
+  margin-bottom: 40px;
+}
+
+.vizCol, .vizCol2 {
+  padding: 0 !important;
+}
+
+.layer {
+  width: 100px;
+  margin: 4px 20px;
+}
+
+#chatbot {
+  font-size: 28px;
+  margin: 10px 40px;
+  display: none;
 }

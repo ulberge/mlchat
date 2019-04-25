@@ -1,0 +1,154 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+
+<!-- You might want to try something fancier: -->
+<!-- html/nunjucks docs: http://mozilla.github.io/nunjucks/ -->
+<!-- jade: http://jade-lang.com/ -->
+<!-- haml: http://haml.info/tutorial.html -->
+<!-- hbs(handlebars): http://handlebarsjs.com/expressions.html -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Glitch!</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://gomix.com/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body>
+    <header>
+      <h1>
+        A Dream of the Future
+      </h1>
+    </header>
+
+    <main>
+      <div class="col-md-2">
+        <h3>Intents</h3>
+        <img id="intent" src="/public/dog_full/wc2_2.jpg" alt="Design Intent" />
+        <button type="button" id="newIntent">New Intent</button>
+        <div id="intentviz"></div>
+      </div>
+
+      <!-- <div class="col-md-2 testCol">
+        <h3>Test 1</h3><button class="judge" type="button">Judge</button><button type="button" class="addIntent">Add Intent</button>
+        <img id="d0" class="colImg" src="/public/dog_legs.jpg" alt="Drawing" />
+        <div id="d0viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div> -->
+      <div class="col-md-2 testCol">
+        <h3>Test 1</h3><button class="judge" type="button">Judge</button><button type="button" class="addIntent">Add Intent</button>
+        <!-- A button for taking snaps -->
+        <div id="my_camera"></div>
+        <!-- <form>
+          <input type=button value="Take Snapshot" id="snapshot">
+        </form> -->
+        <input type=button value="Roll Machine" id="realtime">
+        <!-- <div id="results"></div> -->
+        <div class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>Test 2</h3><button class="judge" type="button">Judge</button><button type="button" class="addIntent">Add Intent</button>
+        <img id="d1" class="colImg" src="/public/dog_full/wc2_5.jpg" alt="Drawing" />
+        <div id="d1viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>Test 3</h3><button class="judge" type="button">Judge</button><button type="button" class="addIntent">Add Intent</button>
+        <img id="d2" class="colImg" src="/public/dog_full/wc2_4.jpg" alt="Drawing" />
+        <div id="d2viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>Test 4</h3><button class="judge" type="button">Judge</button><button type="button" class="addIntent">Add Intent</button>
+        <img id="d3" class="colImg" src="/public/dog_full/wc2_8.jpg" alt="Drawing" />
+        <div id="d3viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>Test 5</h3><button class="judge" type="button">Judge</button><button type="button" class="addIntent">Add Intent</button>
+        <img id="d4" class="colImg" src="/public/dog_ear.jpg" alt="Drawing" />
+        <div id="d4viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+
+      <!-- <div class="col-md-2 testCol">
+        <h3>No Ear</h3><button class="judge" type="button">Judge</button>
+        <img id="d0" class="colImg" src="/public/dog_ear.jpg" alt="Drawing" />
+        <div id="d0viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>No Eye</h3><button class="judge" type="button">Judge</button>
+        <img id="d1" class="colImg" src="/public/dog_eye.jpg" alt="Drawing" />
+        <div id="d1viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>No Nose</h3><button class="judge" type="button">Judge</button>
+        <img id="d2" class="colImg" src="/public/dog_nose.jpg" alt="Drawing" />
+        <div id="d2viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>No Legs</h3><button class="judge" type="button">Judge</button>
+        <img id="d3" class="colImg" src="/public/dog_legs.jpg" alt="Drawing" />
+        <div id="d3viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>No Tongue</h3><button class="judge" type="button">Judge</button>
+        <img id="d4" class="colImg" src="/public/dog_tongue.jpg" alt="Drawing" />
+        <div id="d4viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div> -->
+
+      <!-- <div class="col-md-2 testCol">
+        <h3>No Ear</h3><button class="judge" type="button">Judge</button>
+        <img id="d0" class="colImg" src="/public/dog_ear.jpg" alt="Drawing" />
+        <div id="d0viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>No Eye</h3><button class="judge" type="button">Judge</button>
+        <img id="d1" class="colImg" src="/public/dog_ear.jpg" alt="Drawing" />
+        <div id="d1viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>No Nose</h3><button class="judge" type="button">Judge</button>
+        <img id="d2" class="colImg" src="/public/dog_ear.jpg" alt="Drawing" />
+        <div id="d2viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>No Legs</h3><button class="judge" type="button">Judge</button>
+        <img id="d3" class="colImg" src="/public/dog_ear.jpg" alt="Drawing" />
+        <div id="d3viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div>
+      <div class="col-md-2 testCol">
+        <h3>No Tongue</h3><button class="judge" type="button">Judge</button>
+        <img id="d4" class="colImg" src="/public/dog_ear.jpg" alt="Drawing" />
+        <div id="d4viz" class="vizCol col-md-6"></div>
+        <div class="vizCol2 col-md-6"></div>
+      </div> -->
+    </main>
+
+    <footer>
+    </footer>
+
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="/public/webcam.js"></script>
+    <script src="/public/client.js"></script>
+
+  </body>
+</html>
